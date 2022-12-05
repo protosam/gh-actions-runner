@@ -4,6 +4,11 @@ set -xe
 cd "$(dirname "$0")"
 
 arch="${1:-arm64}"
+
+# translate poor naming schema for the runner downloads
+runner_arch="${arch}"
+[ "${runner_arch}" == "amd64" ] && runner_arch="x64"
+
 runner_plat="linux"
 
 apt update && apt install -y sudo curl jq
@@ -21,7 +26,7 @@ echo "Downloading latest runner ..."
 # For the GHES Alpha, download the runner from github.com
 latest_version_label=$(curl -s -X GET 'https://api.github.com/repos/actions/runner/releases/latest' | jq -r '.tag_name')
 latest_version=$(echo ${latest_version_label:1})
-runner_file="actions-runner-${runner_plat}-${arch}-${latest_version}.tar.gz"
+runner_file="actions-runner-${runner_plat}-${runner_arch}-${latest_version}.tar.gz"
 
 if [ -f "${runner_file}" ]; then
     echo "${runner_file} exists. skipping download."
