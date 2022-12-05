@@ -60,7 +60,7 @@ jobs:
           #   prefix=
           #   suffix=
           tags: |
-            type=semver,pattern={{version}},value=v${{ steps.gh-action-runner-release-version.outputs.stdout }}
+            type=semver,pattern={{version}},value=${{ steps.gh-action-runner-release-version.outputs.stdout }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
