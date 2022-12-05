@@ -29,7 +29,7 @@ jobs:
       - name: Get Actions Runner Release Version
         id: gh-action-runner-release-version
         run: |
-          echo "stdout=$(https://api.github.com/repos/actions/runner/releases | jq -r '.[0].tag_name')" | tee -a ${GITHUB_OUTPUT}
+          echo "stdout=$(curl https://api.github.com/repos/actions/runner/releases | jq -r '.[0].tag_name')" | tee -a ${GITHUB_OUTPUT}
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
