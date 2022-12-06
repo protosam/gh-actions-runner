@@ -1,4 +1,4 @@
-name: build clusterkit/tool
+name: build container
 
 on:
   push:
